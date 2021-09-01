@@ -1,0 +1,8 @@
+
+Can I use personal laptop to map to school H: drive, as I am working ahead on laptop to learn and test things.
+
+BlueJ labs
+
+1) Minus 10 for cat right and down
+2) added 3 lives as nothing was specified, is that ok?
+3) Check on update text method

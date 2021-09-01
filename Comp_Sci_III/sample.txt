@@ -1,0 +1,8 @@
+MayflowerImage p = new MayflowerImage ("img/ninjagirl/Attack__000.png")
+
+frames = new MayflowerImage[10];
+        for(int i = 0; i <= 9; i++)
+        {
+            frames[i] = new MayflowerImage("img/cat/Walk (" + (i+1) + ").png");
+            frames[i].scale(100, 87);
+        }

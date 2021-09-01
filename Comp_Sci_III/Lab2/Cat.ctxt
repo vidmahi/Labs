@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Cat
+comment1.params=
+comment1.target=Cat()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Cat\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=amount
+comment3.target=void\ increaseScore(int)
+comment4.params=
+comment4.target=int\ getScore()
+comment5.params=
+comment5.target=void\ updateText()
+comment6.params=lifeCount
+comment6.target=void\ decreaseLives(int)
+comment7.params=
+comment7.target=int\ getLives()
+numComments=8
