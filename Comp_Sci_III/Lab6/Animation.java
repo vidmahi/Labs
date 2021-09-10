@@ -16,7 +16,7 @@ public class Animation
         
         frames = new MayflowerImage[filenames.length];
         
-        System.out.println(filenames.length);
+        //System.out.println(filenames.length);
         
         /*for(int j = 0; j < filenames.length; j++)
         {
@@ -49,7 +49,7 @@ public class Animation
     
     public void scale(int w, int h)
     {
-        for(int i = 0; i <= 9; i++)
+        for(int i = 0; i < frames.length; i++)
         {
             frames[i].scale(w, h);
         }
@@ -57,7 +57,7 @@ public class Animation
     
     public void setTransparency(int percent)
     {
-        for(int i = 0; i <= 9; i++)
+        for(int i = 0; i < frames.length; i++)
         {
             frames[i].setTransparency(percent);
         }
@@ -65,15 +65,17 @@ public class Animation
     
     public void mirrorHorizontally()
     {
-        for(int i = 0; i <= 9; i++)
+        for(int i = 0; i < frames.length; i++)
         {
             frames[i].mirrorHorizontally();
         }
+        
+        //mirrorHorizontally();
     }
     
     public void setBounds(int x, int y, int w, int h)
     {
-        for(int i = 0; i <= 9; i++)
+        for(int i = 0; i < frames.length; i++)
         {
             frames[i].crop(x, y, w, h);
         }

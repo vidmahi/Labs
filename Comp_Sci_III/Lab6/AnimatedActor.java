@@ -40,5 +40,4 @@ public class AnimatedActor extends GravityActor
     {
         animation = a;
     }
-    
 }

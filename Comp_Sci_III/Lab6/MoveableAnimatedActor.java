@@ -1,26 +1,42 @@
 import mayflower.*;
-
+/**
+ * Write a description of class MoveableAnimatedActor here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
 public class MoveableAnimatedActor extends AnimatedActor
 {
+    // instance variables - replace the example below with your own
     private Animation walkRight;
     private Animation idle;
     private String currentAction;
     private Animation walkLeft;
     String lastCurrentAction;
-    private Animation fallingLeft;
-    private Animation fallingRight;
-    
+    private Animation fallLeft;
+    private Animation fallRight;
+    private String lastDirection;
+    private Animation idleLeft;
+
+    /**
+     * Constructor for objects of class MoveableAnimatedActor
+     */
     public MoveableAnimatedActor()
     {
         walkRight = null;
         idle = null;
         currentAction = null;
         walkLeft = null;
-        lastCurrentAction = null;
+        lastCurrentAction = "";
+        fallLeft = null;
+        fallRight = null;
+        lastDirection = "right";
+        idleLeft = null;
     }
-    
+
     public void act()
     {
+        
         lastCurrentAction = currentAction;
         int x = getX();
         int y = getY();
@@ -37,38 +53,22 @@ public class MoveableAnimatedActor extends AnimatedActor
         
         String newAction = null;
         
-        String[] fallLeftStr = new String[8];
-        String[] fallRightStr = new String[8];
-        
-        for(int r = 0; r <= 7; r++)
+        /*if(currentAction == null)
         {
-            fallRightStr[r] = "img/cat/Fall (" + (r+1) + ").png";
-            //fallLeftStr[r] = fallRightStr[r].mirrorHorizontally();
-            fallLeftStr[r] = fallRightStr[r];
-            
-        }
-        
-        fallingRight = new Animation(50, fallRightStr);
-        
-        fallingLeft = new Animation(50, fallLeftStr);
-        
-        /*
-        if (isFalling())
-        {
-            if (getCurrentAction() == "walkLeft")
-            {
-                setAnimation(fallingLeft);
-            }
-            if (getCurrentAction() == "walkRight")
-            {
-                setAnimation(fallingRight);
-            }
+            newAction = "idle";
         }*/
         
         
-        if(currentAction == null)
+        
+        if(currentAction == null && lastCurrentAction == "walkRight")
         {
             newAction = "idle";
+        }
+        
+        if(currentAction == null && lastCurrentAction == "walkLeft")
+        {
+            lastDirection = "left";
+            newAction = "idleLeft";
         }
         
         if(currentAction == "walkLeft" && lastCurrentAction != "walkLeft")
@@ -80,48 +80,45 @@ public class MoveableAnimatedActor extends AnimatedActor
         {
             setLocation(x + 10, y);
         }
-        
+    
         if(Mayflower.isKeyDown(Keyboard.KEY_RIGHT) && x < rightScreen)
         {
-            int tempX = getX() - 1;
-            int tempY = getY() ;
+            lastDirection = "right";
+            setLocation(x + 1, y);
             if (isBlocked())
             {
-              //System.out.println("right key" + getX() + "," + getY() + "," + x + "," + y); 
-              setLocation(x - 1, y);
-              //newAction = "walkLeft";
+                setLocation(getX() - 1, getY());
+                //newAction = "walkRight";
             }
             else
             {
                 setLocation(x + 1, y);
                 newAction = "walkRight";
             }
+            //newAction ="walkRight";
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_LEFT) && x > 0)
         {
-            int tempA = getX() + 1;
-            int tempB = getY();
+            lastDirection = "left";
+            setLocation(x - 1, y);
             if (isBlocked())
             {
-              //System.out.println("leftt key" + getX() + "," + getY() + "," + x + "," + y); 
-                setLocation(x + 1, y);  
-              //setLocation(tempA + 1, tempB);
-              //newAction = "walkRight";
+                setLocation(getX() + 1, getY());
+                //newAction = "walkLeft";
             }
             else
             {
                 setLocation(x - 1, y);
                 newAction = "walkLeft";
             }
+            //newAction = "walkLeft";
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_UP) && y > 0)
         {
-            if(isBlocked())
+            //setLocation(x, y - 1);
+            if (isBlocked())
             {
-              int tempC = getX();
-              int tempD = getY();
-              setLocation(x, y + 1);
-              //setLocation(tempC, tempD - 1);
+                setLocation(x, y + 1);
             }
             else
             {
@@ -130,12 +127,10 @@ public class MoveableAnimatedActor extends AnimatedActor
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y < bottomScreen)
         {
-            if(isBlocked())
+            //setLocation(x, y + 1);
+            if (isBlocked())
             {
-                int tempU = getX();
-                int tempV = getY();
-                setLocation(x, y - 1);  
-                //setLocation(tempU, tempV + 1);
+                setLocation(x, y - 1);
             }
             else
             {
@@ -144,14 +139,62 @@ public class MoveableAnimatedActor extends AnimatedActor
         }
         else
         {
-            newAction = "idle";
+            //System.out.println(lastDirection);
+            if (lastDirection =="left")
+            {
+                newAction = "idleLeft";
+            }
+            else
+            {
+                newAction = "idle";
+            }
         }
         
+        /*if (isFalling())
+        {
+            //System.out.println(value);
+            if (lastDirection =="left")
+            {
+                newAction = "fallLeft";
+                //setFallingLeftAnimation(fallLeft);
+            }
+            else
+            {
+                newAction = "fallRight";
+                //setFallingRightAnimation(fallRight);
+            }
+                //setFallingLeftAnimation(fallLeft);
+        }*/
+        if (isFalling())
+        {
+            //System.out.println(lastDirection);
+            if (lastDirection =="right")
+            {
+                //newAction = "fallLeft";
+                //System.out.println("in rightloop");
+                //System.out.println(fallRight);
+                setAnimation(fallRight);
+            }
+            else
+            {
+                //newAction = "fallRight";
+                //System.out.println("in leftloop");
+                setAnimation(fallLeft);
+            }
+                //setFallingLeftAnimation(fallLeft);
+        }
+        else
+        {
         if((newAction != null) && !newAction.equals(currentAction))
         {
+           
             if(newAction.equals("idle"))
             {
                 setAnimation(idle);
+            }
+            if(newAction.equals("idleLeft"))
+            {
+                setAnimation(idleLeft);
             }
             if(newAction.equals("walkRight"))
             {
@@ -161,10 +204,34 @@ public class MoveableAnimatedActor extends AnimatedActor
             {
                 setAnimation(walkLeft);
             }
+            /*if(newAction.equals("fallRight"))
+            {
+                setAnimation(fallRight);
+            }
+            if(newAction.equals("fallLeft"))
+            {
+                setAnimation(fallLeft);
+
+            }*/
+            
             currentAction = newAction;
         }
+    }
         
-        
+        /*boolean value = isFalling();
+        if (isFalling())
+        {
+            System.out.println(value);
+            if (lastDirection =="left")
+            {
+                newAction = "fallLeft";
+            }
+            else
+            {
+                newAction = "fallRight";
+            }
+                //setFallingLeftAnimation(fallLeft);
+        }*/
         
         super.act();
     }
@@ -176,20 +243,22 @@ public class MoveableAnimatedActor extends AnimatedActor
     
     public void setWalkRightAnimation(Animation ani)
     {
-        //ani.setBounds(18, 5, 54, 80);
         walkRight = ani;
-    }
-    
-    public void setWalkLeftAnimation(Animation ani)
-    {
-        //ani.setBounds(28, 5, 54, 80);
-        walkLeft = ani;
     }
     
     public void setIdleAnimation(Animation ani)
     {
-        //ani.setBounds(18, 5, 54, 80);
         idle = ani;
+    }
+    
+    public void setIdleLeftAnimation(Animation ani)
+    {
+        idleLeft = ani;
+    }
+    
+    public void setWalkLeftAnimation(Animation ani)
+    {
+        walkLeft = ani;
     }
     
     public String getCurrentAction()
@@ -220,4 +289,16 @@ public class MoveableAnimatedActor extends AnimatedActor
             return false;
         }
     }
+    
+    public void setFallingLeftAnimation(Animation ani)
+    {
+        fallLeft = ani;
+    }
+    
+    public void setFallingRightAnimation(Animation ani)
+    {
+        fallRight = ani;
+    }
+    
+    
 }

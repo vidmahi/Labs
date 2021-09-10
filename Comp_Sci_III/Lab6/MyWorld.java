@@ -8,6 +8,7 @@ public class MyWorld extends World {
     public MyWorld() 
     {
         setBackground("img/BG/BG.png");
+        
         cat = new Cat();
         addObject(cat, 400, 100);
         Dog dog = new Dog();

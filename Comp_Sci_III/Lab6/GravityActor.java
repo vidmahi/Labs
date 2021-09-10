@@ -15,15 +15,21 @@ public class GravityActor extends Actor
         {
             landed = true;
         }
+        
         if(landed == true)
         {
             setLocation(getX(), getY()-1);
+            landed = false;
         }
         else
         {
             setLocation(getX(), getY()+1);
         }
+        
+        
+            
     }
+    
     
     public boolean isBlocked()
     {
@@ -39,11 +45,11 @@ public class GravityActor extends Actor
     
     public boolean isFalling()
     {
-       /* if (!isBlocked())
-        {
-            return true;
-        }
-        return false;*/
+       // if (!isBlocked())
+        //{
+          //  return true;
+        //}
+       // return false;
 
         boolean ret;
         // move the actor down and see if it touches a block
