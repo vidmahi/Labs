@@ -38,6 +38,7 @@ public class Cat extends MoveableAnimatedActor
         
         Animation idleLeft = new Animation(50, idleLeftStr);
         idleLeft.scale(100, 87);
+        idleLeft.mirrorHorizontally();
         idleLeft.setBounds(18, 5, 54, 80);
         
         walk = new Animation(50, str);
@@ -63,6 +64,7 @@ public class Cat extends MoveableAnimatedActor
         setWalkRightAnimation(walk);
         setIdleAnimation(idle);
         setWalkLeftAnimation(walkLeft);
+        setIdleLeftAnimation(idleLeft);
         
         String[] fallLeftStr = new String[8];
         String[] fallRightStr = new String[8];
@@ -74,6 +76,8 @@ public class Cat extends MoveableAnimatedActor
             
         }
         fallingRight = new Animation(50, fallRightStr);
+        fallingRight.scale(100, 87);
+        fallingRight.setBounds(18, 5, 54, 80);
         
         for(int l = 0; l <= 7; l++)
         {
@@ -82,16 +86,16 @@ public class Cat extends MoveableAnimatedActor
         }
         
         fallingLeft = new Animation(50, fallLeftStr);
+        fallingLeft.scale(100, 87);
         fallingLeft.mirrorHorizontally();
+        fallingLeft.setBounds(28, 5, 54, 80);
         
-        if (isFalling())
-        {
-            
-                setFallingLeftAnimation(fallingLeft);
-        }
+        setFallingLeftAnimation(fallingLeft);
+        setFallingRightAnimation(fallingRight);
     }
     public void act()
     {
+        
         super.act();
         //scale(100, 87);
        /* if(animationTimer.isDone())
