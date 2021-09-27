@@ -1,14 +1,14 @@
 #BlueJ package file
-dependency1.from=MyMayflower
-dependency1.to=MyWorld
+dependency1.from=Dog
+dependency1.to=Cat
 dependency1.type=UsesDependency
-dependency2.from=Lab2Runner
-dependency2.to=MyMayflower
+dependency2.from=MyMayflower
+dependency2.to=MyWorld
 dependency2.type=UsesDependency
-dependency3.from=Yarn
-dependency3.to=Cat
+dependency3.from=Lab2Runner
+dependency3.to=MyMayflower
 dependency3.type=UsesDependency
-dependency4.from=Dog
+dependency4.from=Yarn
 dependency4.to=Cat
 dependency4.type=UsesDependency
 dependency5.from=MyWorld
