@@ -1,0 +1,16 @@
+Part 2 – Analyze your ArrayList
+In the lab write-up:
+ Fill out the following chart describing the Big O of each method you wrote in your MyArrayList class. Explain
+and defend your answers by explaining the similarities and differences.
+(“Because that’s what my neighbor told me it was” is not a good defense!)
+ Sketch and label the Big-O algorithm runtime for each method.
+Constructor O( 1 )
+add(Object) O( n )
+add(int, Object) O( n )
+contains(Object) O( n )
+get(int) O( 1 )
+isEmpty() O( 1 )
+remove(int) O( n )
+remove(Object) O( n )
+set(int, Object) O( 1 )
+size() O( 1 )

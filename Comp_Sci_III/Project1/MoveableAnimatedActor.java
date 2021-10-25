@@ -29,6 +29,8 @@ public class MoveableAnimatedActor extends AnimatedActor
 
     private boolean jump;
     private boolean fall;
+    
+   // private int jumpCounter;
     /**
      * Constructor for objects of class MoveableAnimatedActor
      */
@@ -51,6 +53,8 @@ public class MoveableAnimatedActor extends AnimatedActor
         
         jump = false;
         fall = false;
+        
+        //jumpCounter = 0;
     }
 
     
@@ -135,6 +139,7 @@ public class MoveableAnimatedActor extends AnimatedActor
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_UP) && y > 0)
         {
+            
             setLocation(x, y - 1);
             if (isTouching(Block.class))
             {
@@ -147,22 +152,39 @@ public class MoveableAnimatedActor extends AnimatedActor
             else
             {
                 
-                if (lastDirection =="left" && fall == false)
+                if (lastDirection =="left" && fall == true)
                 {
                     
                     setLocation(getX(), getY() - 10);
                     newAction = "jumpLeft";
                     jump = true;
                     
+                  /*  jumpCounter++;
+                    
+                    if(jumpCounter%25==0)
+                    {
+                        jump = false;
+                        setLocation(getX(), getY() + 10);
+                        setAnimation(fallRight);
+                    }*/
+                    //jump = false;
                 }
                 else
                 {
                     setLocation(getX(), getY() - 10);
                     newAction = "jumpRight";
                     jump = true;
+                    //jump = false;
                     
+                   /* jumpCounter++;
+                    System.out.println(jumpCounter);
+                    if(jumpCounter % 25 ==0)
+                    {
+                        jump = false;
+                        setLocation(getX(), getY() + 10);
+                        setAnimation(fallLeft);
+                    }*/
                 }
-                
             }
         }
         else if(Mayflower.isKeyDown(Keyboard.KEY_DOWN) && y < bottomScreen)
@@ -229,6 +251,7 @@ public class MoveableAnimatedActor extends AnimatedActor
                 setAnimation(fallLeft);
                 fall = true;
             }
+            
         }
         else
         {

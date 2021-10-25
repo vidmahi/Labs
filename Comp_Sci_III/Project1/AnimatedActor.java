@@ -23,6 +23,7 @@ public class AnimatedActor extends GravityActor
         //sets the animationTimer object to have 1000000 (units), and creates a 
         //String array holding 10 Strings in the array
         animationTimer = new Timer(1000000);
+       // animationTimer = new Timer(1000000000);
         String[] str = new String[10];
         
     }
