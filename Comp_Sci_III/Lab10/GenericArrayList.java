@@ -78,6 +78,7 @@ public class GenericArrayList<E> implements GenericList<E>
             }
             
             newArr[index] = obj;
+            test = (E[]) newArr;
         }
     }
     
