@@ -72,40 +72,13 @@ public class MyLinkedList<E> implements GenericList<E>
      */
     public void add(int index, E obj)
     {
-        //this was the original
-        /*Node<E> n = new Node<E>(obj);
+        Node<E> n = new Node<E>(obj);
         Node<E> before = getNode(index-1);
         Node<E> after = before.getNext();
         
         before.setNext(n);
-        n.setNext(after);*/
+        n.setNext(after);
         
-        Node<E> first = head;
-        Node<E> n = new Node<E>(obj);
-        
-        if(index <= 0) {
-            n.next = head;
-            //first.prev = n;
-            head = n;
-        }
-        else if(index >=size()) {
-           /* n.next = null;
-            //Node<E> temp = head;
-            while(first.next != null){
-                first = first.next;
-            }
-            first.next = n; */
-            
-            add(obj);
-        }
-        else
-        {
-            Node<E> before = getNode(index-1);
-            Node<E> after = before.getNext();
-        
-            before.setNext(n);
-            n.setNext(after);
-        }
     }
     
     /**
@@ -113,8 +86,7 @@ public class MyLinkedList<E> implements GenericList<E>
      */
     public boolean contains(E obj)
     {
-        // this was the original
-       /* int spot = 0;
+        int spot = 0;
         Node<E> n = head.getNext();
         while (n != null && !n.getValue().equals(obj))
         {
@@ -125,35 +97,8 @@ public class MyLinkedList<E> implements GenericList<E>
         {
             return true;
         }
-        return false;*/
-        
-        int spot = 0;
-        Node<E> n = head.getNext();
-        
-        /*while (n != null && !n.getValue().equals(obj))
-        {
-            spot++;
-            n = n.getNext();
-        }
-        if (spot != 0)
-        {
-            return true;
-        }
-        return false;*/
-        
-       
-
-        while (n != null)
-        {
-          if (n.getValue().equals(obj))
-          {
-            return true;
-          }
-
-          n = n.getNext();
-        }
-
         return false;
+        
     }
     
     /**
@@ -162,11 +107,6 @@ public class MyLinkedList<E> implements GenericList<E>
      */
     public E get(int index)
     {
-        if (index < 0 || index >= size())
-        {
-            return null;
-        }
-        
         return getNode(index).getValue();
     }
     
@@ -175,13 +115,12 @@ public class MyLinkedList<E> implements GenericList<E>
      */
     public boolean isEmpty()
     {
-       /*  Node<E> n = head.getNext();
+         Node<E> n = head.getNext();
         if (n.getNext() == null)
         {
             return true;
         }
-        return false;*/
-        return size() == 0;
+        return false;
     }
     
     /**
@@ -196,33 +135,7 @@ public class MyLinkedList<E> implements GenericList<E>
         {
             return null;
         }
-        
-        if(isEmpty())
-        {
-            return null;
-        }
-        
         Node<E> n = head;
-        
-        E old = null;
-        // Original
-        // If index=0 , put head node = Node at index 1.
-        if (index == 0) {
-            if(n.getNext()!=null) {
-              old = getNode(index).getValue();
-                Node<E> aftern = n.getNext();
-            //n.setNext(aftern);
-            head = aftern;
-            }else {
-                n=null;
-            }
-            
-            return old;
-        }
-        
-        
-        
-        
         if (n.getNext() == null)
         {
             return null;
@@ -235,51 +148,11 @@ public class MyLinkedList<E> implements GenericList<E>
             i++;
             n = n.getNext();
         }
-        E old1 = getNode(index).getValue();
+        E old = getNode(index).getValue();
         
         Node<E> before = getNode(i-1);
         Node<E> after = before.getNext();
-        return old1;
-        
-        ////////////////////////////////////////// version 2
-        /*
-        E old = null;
-        
-        if (index < 0 || index >= size())
-        {
-            return null;
-        }
-        else if(isEmpty())
-        {
-            return null;
-        }
-        else if (index == 0)
-        {
-            old = n.getValue();
-            Node<E> second = n.getNext();
-            head = second;
-            return old;
-        }
-        else
-        {
-            int i = 0;
-        
-        while(n != null && i < index)
-        {
-            i++;
-            n = n.getNext();
-        }
-        E old1 = getNode(index).getValue();
-        
-        Node<E> before = getNode(i-1);
-        Node<E> after = before.getNext();
-        return old1;
-        }
-        */
-        
-        
-        
-        
+        return old;
     }
     
     /**
@@ -288,68 +161,17 @@ public class MyLinkedList<E> implements GenericList<E>
      */
     public boolean remove(E obj)
     {
-        //this was the original
-      /*  E old = null;
-        
         if (indexOf(obj) != -1)
         {
             int i = indexOf(obj);
-            //Node<E> old = getNode(i);
-           // Node<E> before = getNode(i-1);
-            //Node<E> after = before.getNext();
+            Node<E> old = getNode(i);
+            Node<E> before = getNode(i-1);
+            Node<E> after = before.getNext();
         
-            //before.setNext(after);
-            old = remove(i);
+            before.setNext(after);
             return true;
         }
-        return false;*/
-        
-        //this was version 2
-        Node<E> n = head;
-        //int i = 0;
-        int i = indexOf(obj);
-        if (i != -1)
-        {
-            if (i == 0)
-            {
-                Node<E> after = n.getNext();
-                head = after;
-            }
-            else
-            {
-        while(n.getNext() != null)
-        {
-            //i++;
-            if (n.getValue().equals(obj))
-            {
-                Node<E> old = getNode(i);
-                Node<E> before = getNode(i-1);
-                Node<E> after = before.getNext();
-        
-                before.setNext(after);
-                return true;
-                    
-            }
-            else
-            {
-                n = n.getNext();
-                i++;
-            }
-        }
-    }
         return false;
-            
-        }
-        
-        return false;
-        //this was add obj
-        /*Node<E> n = head;
-        while (n.getNext() != null)
-        {
-            n = n.getNext();
-        }
-        n.setNext(new Node<E>(obj));
-        return true;*/
     }
     
     /**
@@ -373,8 +195,7 @@ public class MyLinkedList<E> implements GenericList<E>
             n = n.getNext();
         }
         E old = getNode(index).getValue();
-        //n.setValue(obj);
-        E newn = getNode(i).setValue(obj);
+        n.setValue(obj);
         return old;
     }
     
@@ -402,7 +223,6 @@ public class MyLinkedList<E> implements GenericList<E>
         public Node(E data)
         {
             this.value = data;
-            this.next = null;
         }
         
         public E getValue()
