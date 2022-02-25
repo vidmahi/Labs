@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class TicTacToeClient extends Client
 {
+    //instance variables :D
+    //testing git branches
     private TicTacToeStage stage;
     private TicTacToe game;
 
