@@ -72,6 +72,7 @@ public class MyArrayList implements MyList
             }
             
             newArr[index] = obj;
+            data = newArr;
         }
     }
     

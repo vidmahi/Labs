@@ -73,11 +73,12 @@ public class MyLinkedList<E> implements GenericList<E>
     public void add(int index, E obj)
     {
         int s = size();
-        Node<E> first = head;
-        Node<E> n = new Node<E>(obj);
+       // Node<E> first = head;
+       // Node<E> n = new Node<E>(obj);
         s++;
+        int i = 0;
         
-        if (first !=null)
+      /*  if (first !=null)
         {
             for (int i = 0; i < index && first.getNext() != null; i++)
             {
@@ -85,7 +86,33 @@ public class MyLinkedList<E> implements GenericList<E>
             }
         }
         n.setNext(first.getNext());
-        first.setNext(n);
+        first.setNext(n);*/
+        
+        Node<E> n = head;
+        Node<E> nn = new Node<E>(obj);
+        
+        
+        if (index >= size())
+        {
+            add(obj);
+        }
+        else if (index <= 0)
+        {
+            nn.setNext(n.getNext());
+            n.setNext(nn);
+        }
+        else
+        {
+            while (n.getNext() != null && i < index)
+            {
+                i++;
+                n = n.getNext();
+            }
+            nn.setNext(n.getNext());
+            n.setNext(nn);
+        }
+        
+        
     }
     
     /**
@@ -213,7 +240,7 @@ public class MyLinkedList<E> implements GenericList<E>
         int i = indexOf(obj);
         if (i != -1)
         {
-            if (i ==0)
+           /* if (i ==0)
             {
                 if(n.getNext()!=null) 
                 {
@@ -229,10 +256,10 @@ public class MyLinkedList<E> implements GenericList<E>
                 return true;
             }
             else
-            {
+            {*/
                 old = remove(i);
                 return true;
-            }
+           // }
         }
         return false;
     }
@@ -250,16 +277,19 @@ public class MyLinkedList<E> implements GenericList<E>
             return null;
         }
         
-        Node<E> n = head;
+        Node<E> n = head.getNext();
         int i = 0;
         
-        while(n != null && i < index)
+        while(n.getNext() != null && i < index)
         {
             i++;
             n = n.getNext();
         }
-        E old = getNode(i).getValue();
-        E newn = getNode(i).setValue(obj);
+        //E old = getNode(i).getValue();
+       E old = n.getValue();
+        //E newn = getNode(i).setValue(obj);
+        E newn = n.setValue(obj);
+        
         return old;
               
         
